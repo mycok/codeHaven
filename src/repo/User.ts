@@ -1,9 +1,15 @@
 import { Length } from 'class-validator';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+} from 'typeorm';
 
+import { Thread } from './Thread';
 @Entity({ name: 'Users' })
-export default class User {
-    @PrimaryGeneratedColumn({ name: 'id', type: 'bigint' })
+export class User {
+    @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
     id!: string
 
     @Column('varchar', {
@@ -23,7 +29,7 @@ export default class User {
     email!: string
 
     @Column('varchar', {
-      name: 'password',
+      name: 'Password',
       length: 100,
       nullable: false,
     })
@@ -43,4 +49,7 @@ export default class User {
       nullable: false,
     })
     isDisabled!: boolean
+
+    @OneToMany(() => Thread, (thread) => thread.user)
+    threads!: Thread[]
 }
