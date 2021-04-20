@@ -3,11 +3,13 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { Length } from 'class-validator';
 
 import { Thread } from './Thread';
 import { User } from './User';
+import { ThreadItemPoint } from './ThreadItemPoint';
 
 @Entity({ name: 'ThreadItems' })
 export class ThreadItem {
@@ -29,4 +31,7 @@ export class ThreadItem {
 
     @ManyToOne(() => User, (user) => user.threads)
     user!: User
+
+    @OneToMany(() => ThreadItemPoint, (threadPointItem) => threadPointItem.threadItem)
+    threadItemPoints!: ThreadItemPoint[]
 }

@@ -9,7 +9,7 @@ import { Length } from 'class-validator';
 
 import { User } from './User';
 import { ThreadItem } from './ThreadItem';
-
+import { ThreadPoint } from './ThreadPoint';
 @Entity({ name: 'Threads' })
 export class Thread {
     @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
@@ -34,4 +34,7 @@ export class Thread {
 
     @OneToMany(() => ThreadItem, (threadItems) => threadItems.thread)
     threadItems!: ThreadItem[]
+
+    @OneToMany(() => ThreadPoint, (threadPoint) => threadPoint.thread)
+    threadPoints!: ThreadPoint[]
 }
