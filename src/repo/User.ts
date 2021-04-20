@@ -7,6 +7,8 @@ import {
 } from 'typeorm';
 
 import { Thread } from './Thread';
+import { ThreadPoint } from './ThreadPoint';
+import { ThreadItemPoint } from './ThreadItemPoint';
 @Entity({ name: 'Users' })
 export class User {
     @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
@@ -52,4 +54,10 @@ export class User {
 
     @OneToMany(() => Thread, (thread) => thread.user)
     threads!: Thread[]
+
+    @OneToMany(() => ThreadPoint, (threadPoint) => threadPoint.user)
+    threadPoints!: ThreadPoint[]
+
+    @OneToMany(() => ThreadItemPoint, (threadItemPoint) => threadItemPoint.user)
+    threadItemPoints!: ThreadItemPoint[]
 }
