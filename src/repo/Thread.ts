@@ -10,6 +10,7 @@ import { Length } from 'class-validator';
 import { User } from './User';
 import { ThreadItem } from './ThreadItem';
 import { ThreadPoint } from './ThreadPoint';
+import { ThreadCategory } from './ThreadCategory';
 @Entity({ name: 'Threads' })
 export class Thread {
     @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
@@ -31,6 +32,9 @@ export class Thread {
 
     @ManyToOne(() => User, (user) => user.threads)
     user!: User
+
+    @ManyToOne(() => ThreadCategory, (threadCategory) => threadCategory.threads)
+    category!: ThreadCategory
 
     @OneToMany(() => ThreadItem, (threadItems) => threadItems.thread)
     threadItems!: ThreadItem[]
