@@ -10,7 +10,7 @@ export class Timestamps extends BaseEntity {
     })
     createdBy!: string
 
-    @Column('timestamp with local time zone', {
+    @Column('timestamp with time zone', {
       name: 'CreatedOn',
       default: () => `now()`,
       nullable: false,
@@ -20,12 +20,12 @@ export class Timestamps extends BaseEntity {
     @Column('varchar', {
       name: 'LastModifiedBy',
       length: 60,
-      default: () => `getpgusername`,
+      default: () => `getpgusername()`,
       nullable: false,
     })
     lastModifiedBy!: string
 
-    @Column('timestamp with local time zone', {
+    @Column('timestamp with time zone', {
       name: 'LastModifiedOn',
       default: () => `now()`,
       nullable: false,

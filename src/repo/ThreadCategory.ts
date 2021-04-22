@@ -6,9 +6,10 @@ import {
 } from 'typeorm';
 
 import { Thread } from './Thread';
+import { Timestamps } from './Timestamps';
 
 @Entity({ name: 'ThreadCategories' })
-export class ThreadCategory {
+export class ThreadCategory extends Timestamps {
     @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
     id!: string
 

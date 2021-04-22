@@ -7,9 +7,10 @@ import {
 
 import { ThreadItem } from './ThreadItem';
 import { User } from './User';
+import { Timestamps } from './Timestamps';
 
 @Entity({ name: 'ThreadItemPoints' })
-export class ThreadItemPoint {
+export class ThreadItemPoint extends Timestamps {
     @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
     id!: string
 

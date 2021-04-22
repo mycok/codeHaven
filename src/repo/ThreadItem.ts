@@ -10,9 +10,10 @@ import { Length } from 'class-validator';
 import { Thread } from './Thread';
 import { User } from './User';
 import { ThreadItemPoint } from './ThreadItemPoint';
+import { Timestamps } from './Timestamps';
 
 @Entity({ name: 'ThreadItems' })
-export class ThreadItem {
+export class ThreadItem extends Timestamps {
     @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
     id!: string
 
