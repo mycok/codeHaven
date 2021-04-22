@@ -9,8 +9,10 @@ import {
 import { Thread } from './Thread';
 import { ThreadPoint } from './ThreadPoint';
 import { ThreadItemPoint } from './ThreadItemPoint';
+import { Timestamps } from './Timestamps';
+
 @Entity({ name: 'Users' })
-export class User {
+export class User extends Timestamps {
     @PrimaryGeneratedColumn({ name: 'Id', type: 'bigint' })
     id!: string
 
