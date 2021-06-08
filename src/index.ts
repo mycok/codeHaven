@@ -1,9 +1,14 @@
-import express, { Router, Response } from 'express';
+/* eslint-disable no-unused-vars */
+import express, { Router, Response, Request } from 'express';
 import { createServer } from 'http';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 import Redis from 'ioredis';
 import { createConnection } from 'typeorm';
+
+import { register } from './repo/user';
+import { isEmailValid } from './utils/middleware/emailValidator';
+import { isPasswordValid } from './utils/middleware/passwordValidator';
 
 require('dotenv').config();
 
@@ -16,6 +21,7 @@ async function main() {
   }
 
   const app = express();
+  app.use(express.json());
   const server = createServer(app);
   const router = Router();
 
@@ -41,15 +47,9 @@ async function main() {
   }));
   app.use(router);
 
-  router.get('/', (req: any, res: Response) => {
-    if (!req.session!.userId) {
-      req.session.userId = req.query.userId;
-      req.session.loadedCount = 0;
-    } else {
-        req.session!.loadedCount = Number(req.session.loadedCount) + 1;
-    }
-
-    res.send(`userId: ${req.session!.userId}, loadedCount: ${req.session!.loadedCount}`);
+  router.post('/register', isEmailValid, isPasswordValid, async (req: Request, res: Response) => {
+    const result = await register({ ...req.body });
+    return res.status(200).json(result);
   });
 
   server.listen({ port: process.env.SERVER_PORT }, () => console.log(`Yai, our server is up and running on port ${process.env.SERVER_PORT}`));
